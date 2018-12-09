@@ -50,7 +50,7 @@ Response: "Invalid credentials."
 
 ## Create Post
 
-    POST openchat/user/<id>/posts
+    POST openchat/username/<id>/posts
 {
 	"text" : "Hello everyone. I'm Alice."
 }
@@ -64,12 +64,12 @@ Status CREATED - 201
 }
 
 **Failure**
-Status: BAD_REQUEST - 400 (in case user does not exist)
+Status: BAD_REQUEST - 400 (in case username does not exist)
 Response: "User does not exit."
 
 ## Retrieve Posts (User timeline)
 
-GET - openchat/user/<id>/timeline
+GET - openchat/username/<id>/timeline
 [{
 	"postId" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
 	"userId" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -86,7 +86,7 @@ GET - openchat/user/<id>/timeline
 Status OK - 200
 
 **Failure**
-Status: BAD_REQUEST - 400 (in case user does not exist)
+Status: BAD_REQUEST - 400 (in case username does not exist)
 Response: "User does not exit."
 
 ## Follow User
@@ -106,7 +106,7 @@ Response: "At least one of the users does not exit."
 
 ## Retrieve Wall
 
-GET - openchat/user/<id>/wall
+GET - openchat/username/<id>/wall
 [{
 	"postId" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
 	"userId" : "BOB_IDxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -138,7 +138,7 @@ GET - openchat/user/<id>/wall
 Status OK - 200
 
 **Failure**
-Status: BAD_REQUEST - 400 (in case user does not exist)
+Status: BAD_REQUEST - 400 (in case username does not exist)
 Response: "User does not exist."
 
 ## Retrieve All Users
@@ -161,9 +161,9 @@ GET - openchat/users
 **Success**
 Status OK - 200
 
-## Retrieve all users followed by another user (followees)
+## Retrieve all users followed by another username (followees)
 
-GET - openchat/user/:id/followees
+GET - openchat/username/:id/followees
 [{
 	"id" : "123e4567-e89b-12d3-a456-426655440000",
 	"username" : "Alice",

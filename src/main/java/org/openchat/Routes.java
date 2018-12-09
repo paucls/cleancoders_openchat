@@ -1,6 +1,7 @@
 package org.openchat;
 
 import org.openchat.api.UsersAPI;
+import org.openchat.domain.users.UserService;
 
 import static spark.Spark.get;
 import static spark.Spark.options;
@@ -17,7 +18,8 @@ public class Routes {
     }
 
     private void createAPIs() {
-        usersAPI = new UsersAPI();
+        UserService usersService = new UserService();
+        usersAPI = new UsersAPI(usersService);
     }
 
     private void openchatRoutes() {
