@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 import static org.openchat.infrastructure.builders.UserBuilder.aUser;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -46,7 +46,7 @@ public class UserServiceShould {
 
         User user = userService.createUser(REGISTRATION_DATA);
 
-        Mockito.verify(userRepository).add(USER);
+        verify(userRepository).add(USER);
         assertThat(user).isEqualTo(USER);
     }
 }
