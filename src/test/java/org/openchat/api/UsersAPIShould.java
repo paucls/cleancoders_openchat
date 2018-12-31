@@ -39,12 +39,13 @@ public class UsersAPIShould {
     @Before
     public void setUp() {
         usersAPI = new UsersAPI(userService);
+
+        given(request.body()).willReturn(jsonContaining(REGISTRATION_DATA));
+        given(userService.createUser(REGISTRATION_DATA)).willReturn(USER);
     }
 
     @Test
     public void create_a_new_user() {
-        given(request.body()).willReturn(jsonContaining(REGISTRATION_DATA));
-
         usersAPI.createUser(request, response);
 
         verify(userService).createUser(REGISTRATION_DATA);
@@ -52,9 +53,6 @@ public class UsersAPIShould {
 
     @Test
     public void return_json_representing_a_newly_created_user() {
-        given(request.body()).willReturn(jsonContaining(REGISTRATION_DATA));
-        given(userService.createUser(REGISTRATION_DATA)).willReturn(USER);
-
         String result = usersAPI.createUser(request, response);
 
         verify(response).status(201);

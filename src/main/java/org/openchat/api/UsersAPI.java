@@ -18,7 +18,11 @@ public class UsersAPI {
     public String createUser(Request request, Response response) {
         RegistrationData registration = registrationDataFrom(request);
         User user = userService.createUser(registration);
-        return "";
+
+        response.status(201);
+        response.type("application/json");
+
+        return toJson(user);
     }
 
     private RegistrationData registrationDataFrom(Request request) {
@@ -29,5 +33,13 @@ public class UsersAPI {
                 json.getString("password", ""),
                 json.getString("about", "")
         );
+    }
+
+    private String toJson(User user) {
+        return new JsonObject()
+                .add("id", user.id())
+                .add("username", user.username())
+                .add("about", user.about())
+                .toString();
     }
 }
