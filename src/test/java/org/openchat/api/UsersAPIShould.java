@@ -46,7 +46,7 @@ public class UsersAPIShould {
     private UsersAPI usersAPI;
 
     @Before
-    public void setUp() {
+    public void setUp() throws UsernameAlreadyInUseException {
         usersAPI = new UsersAPI(userService);
 
         given(request.body()).willReturn(jsonContaining(REGISTRATION_DATA));
@@ -54,7 +54,7 @@ public class UsersAPIShould {
     }
 
     @Test
-    public void create_a_new_user() {
+    public void create_a_new_user() throws UsernameAlreadyInUseException {
         usersAPI.createUser(request, response);
 
         verify(userService).createUser(REGISTRATION_DATA);
@@ -70,7 +70,7 @@ public class UsersAPIShould {
     }
 
     @Test
-    public void return_an_error_when_creating_a_user_with_an_existing_username() {
+    public void return_an_error_when_creating_a_user_with_an_existing_username() throws UsernameAlreadyInUseException {
         given(userService.createUser(REGISTRATION_DATA)).willThrow(UsernameAlreadyInUseException.class);
 
         String result = usersAPI.createUser(request, response);
