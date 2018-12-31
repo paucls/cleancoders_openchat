@@ -22,7 +22,7 @@ public class UsersAPI {
         response.status(201);
         response.type("application/json");
 
-        return toJson(user);
+        return jsonFor(user);
     }
 
     private RegistrationData registrationDataFrom(Request request) {
@@ -35,7 +35,7 @@ public class UsersAPI {
         );
     }
 
-    private String toJson(User user) {
+    private String jsonFor(User user) {
         return new JsonObject()
                 .add("id", user.id())
                 .add("username", user.username())
