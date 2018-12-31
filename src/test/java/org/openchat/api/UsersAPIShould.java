@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.openchat.infrastructure.builders.UserBuilder.aUser;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UsersAPIShould {
@@ -24,8 +25,15 @@ public class UsersAPIShould {
     private static final String USERNAME = "John Doe";
     private static final String PASSWORD = "1234";
     private static final String ABOUT = "About John";
+
     private static final RegistrationData REGISTRATION_DATA = new RegistrationData(USERNAME, PASSWORD, ABOUT);
-    private static final User USER = new User(USER_ID, USERNAME, PASSWORD, ABOUT);
+
+    private static final User USER = aUser()
+            .withId(USER_ID)
+            .withUsername(USERNAME)
+            .withPassword(PASSWORD)
+            .withAbout(ABOUT)
+            .build();
 
     @Mock
     private Request request = mock(Request.class);
